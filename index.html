@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat API Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#send-button').click(function() {
+                var userInput = $('#user-input').val();
+                sendMessage(userInput);
+            });
+
+            function sendMessage(message) {
+                var apiUrl = 'http://chat.ai.cneko.org/?t=' + encodeURIComponent(message) + '&p=' + encodeURIComponent(message);
+                
+                $.get(apiUrl, function(response) {
+                    displayMessage(message, 'user');
+                    displayMessage(response.response, 'bot');
+                });
+            }
+
+            function displayMessage(message, sender) {
+                var converter = new showdown.Converter();
+                var html = converter.makeHtml(message);
+
+                var messageContainer = $('<div>').addClass('message').addClass(sender);
+                var messageText = $(html);
+                messageContainer.append(messageText);
+                $('#chat-messages').append(messageContainer);
+            }
+        });
+    </script>
+
+    <style>
+        #chat-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #chat-messages {
+            margin-bottom: 10px;
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .user {
+            background-color: #f2f2f2;
+        }
+
+        .bot {
+            background-color: #e2e2e2;
+        }
+    </style>
+</body>
+</html>
