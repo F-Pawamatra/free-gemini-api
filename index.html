@@ -6,7 +6,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <style>
-            body, textarea, button{
+            body, input, textarea, button{
                 font-family: 'Roboto', sans-serif;
                 font-size: 16px;
             }
@@ -40,7 +40,7 @@
     <body>
         <div id="chat-container">
             <div id="chat-messages"></div>
-            <textarea id="user-input" placeholder="Type your message..."></textarea>
+            <input type="text" id="user-input" placeholder="Type your message..."></input>
             <button id="send-button">Send</button>
             <div id="loading" style="display: none;">Loading...</div>
         </div>
