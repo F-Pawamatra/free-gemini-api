@@ -20,7 +20,7 @@
             });
 
             function sendMessage(message) {
-                var apiUrl = 'http://chat.ai.cneko.org/?t=' + encodeURIComponent(message) + '&p=' + encodeURIComponent(message);
+                var apiUrl = 'https://chat.ai.cneko.org/?t=' + encodeURIComponent(message) + '&p=' + encodeURIComponent(message);
                 
                 $.get(apiUrl, function(response) {
                     displayMessage(message, 'user');
